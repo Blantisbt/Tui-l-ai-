@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trò chơi với Tranglys</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <h1>Chào mừng đến với trò chơi Tranglys!</h1>
+
+    <p>Bạn đã sẵn sàng chưa?</p>
+    <button onclick="startGame()">Bắt đầu</button>
+
+    <div id="game" style="display: none;">
+    </div>
+
+    <p id="result" style="display: none;"></p>
+
+    <p>Cảm ơn bạn đã tham gia trò chơi vô tri này của tôi :)</p>
+</div>
+
+<script>
+    let score = 0;
+    let totalQuestions = 3;
+
+    function startGame() {
+        document.getElementById('game').innerHTML = `
+            <p>Question 1: Nhóm nhạc yêu thích của tôi là gì?</p>
+            <p>A. Blackpink      B. Exo      C. Seventeen</p>
+            <input type="text" id="answer1" placeholder="Câu trả lời của bạn là">
+
+            <p>Question 2: Địa điểm du lịch tôi thích?</p>
+            <p>A. Sapa      B. Đà Lạt      C. Hà Nội</p>
+            <input type="text" id="answer2" placeholder="Câu trả lời của bạn là">
+
+            <p>Question 3: Màu sắc yêu thích của tôi?</p>
+            <p>A. Trắng      B. Đen      C. Xanh dương</p>
+            <input type="text" id="answer3" placeholder="Câu trả lời của bạn là">
+
+            <button onclick="submitAnswers()">Kiểm tra kết quả</button>
+        `;
+
+        document.getElementById('game').style.display = 'block';
+    }
+
+    function submitAnswers() {
+        const answer1 = document.getElementById('answer1').value.toUpperCase();
+        const answer2 = document.getElementById('answer2').value.toUpperCase();
+        const answer3 = document.getElementById('answer3').value.toUpperCase();
+
+        if (answer1 === 'A') score++;
+        if (answer2 === 'B') score++;
+        if (answer3 === 'C') score++;
+
+        document.getElementById('game').style.display = 'none';
+
+        document.getElementById('result').style.display = 'block';
+        document.getElementById('result').innerHTML = `Cảm ơn bạn đã tham gia câu hỏi vô tri này của tôi :)<br>`;
+
+        if (score === totalQuestions) {
+            document.getElementById('result').innerHTML += `100 điểm cho tình bạn của chúng ta!`;
+        }
+
+        document.getElementById('result').innerHTML += `Điểm của bạn: ${score}/${totalQuestions}`;
+
+        document.getElementById('result').innerHTML += `<br>Cảm ơn lần cuối nhé`;
+    }
+</script>
+
+</body>
+</html>
